@@ -1,0 +1,17 @@
+name: SoftSell
+api: 5.0.0
+version: 1.0.0
+main: nicholass003\softsell\Main
+author: nicholass003
+src-namespace-prefix: nicholass003\softsell
+commands:
+  softsell:
+    description: SoftSell Commands
+    permission: softsell.command
+    aliases:
+      - sell
+permissions:
+  softsell.command:
+    default: true
+  softsell.command.admin:
+    default: op

@@ -1,0 +1,9 @@
+# Supported Database Provider
+# - JSON
+# - SQLite3
+database-provider: JSON
+
+# Supported Economy Provider
+# - BedrockEconomy
+# - EconomyAPI
+economy-provider: BedrockEconomy
