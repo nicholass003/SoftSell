@@ -104,6 +104,9 @@ class Main extends PluginBase{
                             Utils::unsetSellActive($sender);
                             $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN. "SoftSell have set to None");
                             return true;
+                        default:
+                            $sender->sendMessage("Usage: /softsell <auto:manual:reset>");
+                            return true;
                     }
                 }else{
                     $sender->sendMessage("Usage: /softsell <auto:manual>");
