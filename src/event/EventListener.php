@@ -62,6 +62,7 @@ class EventListener implements Listener{
 
     public function onPlayerInteract(PlayerInteractEvent $event) : void{
         $player = $event->getPlayer();
+        if($event->getAction() === PlayerInteractEvent::LEFT_CLICK_BLOCK) return;
         if(Utils::getSellActive($player) === Utils::TYPE_MANUAL){
             $item = $event->getItem();
             $price = $this->plugin->getDatabaseProvider()->getPrice(Utils::getItemParserName($item->getVanillaName()));
