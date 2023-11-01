@@ -39,7 +39,7 @@ class BedrockEconomyProvider extends EconomyProvider{
             $decimals = (int)$amount[1] ?? 0;
         }
 
-        BedrockEconomyAPI::ASYNC()->add($player->getXuid(), $player->getName(), $balance, $decimals);
+        BedrockEconomyAPI::CLOSURE()->add($player->getXuid(), $player->getName(), $balance, $decimals, static fn () => null, static fn () => null);
     }
 
     public function checkClass() : bool{
