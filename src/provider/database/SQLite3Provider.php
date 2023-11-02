@@ -78,7 +78,7 @@ class SQLite3Provider extends DatabaseProvider{
         try{
             $prepare = $this->database->prepare('UPDATE prices SET price = :value WHERE item = :name;');
             $prepare->bindValue(':name', $name, SQLITE3_TEXT);
-            $prepare->bindValue(':value', $value, is_float($value)? SQLITE3_FLOAT : SQLITE3_INTEGER);
+            $prepare->bindValue(':value', $value, is_float($value) ? SQLITE3_FLOAT : SQLITE3_INTEGER);
             if($prepare->execute() === false){
                 throw new Exception('Failed to update prices');
             }

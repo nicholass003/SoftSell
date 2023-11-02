@@ -97,12 +97,12 @@ class Main extends PluginBase{
                         case "hand":
                         case "manual":
                             Utils::setSellActive($sender, Utils::TYPE_MANUAL);
-                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN. "SoftSell have set to Manual");
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "SoftSell have set to Manual");
                             return true;
                         case "off":
                         case "reset":
                             Utils::unsetSellActive($sender);
-                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN. "SoftSell have set to None");
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "SoftSell have set to None");
                             return true;
                         default:
                             $sender->sendMessage("Usage: /softsell <auto:manual:reset>");

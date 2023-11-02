@@ -25,6 +25,7 @@ namespace nicholass003\softsell\utils;
 use pocketmine\player\Player;
 
 class Utils{
+
     public const TYPE_NONE = 0;
     public const TYPE_AUTO = 1;
     public const TYPE_MANUAL = 2;
