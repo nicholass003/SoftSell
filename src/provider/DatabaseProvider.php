@@ -35,4 +35,6 @@ abstract class DatabaseProvider{
     abstract public function getPrice(string $name) : float|int;
 
     abstract public function setPrice(string $name, float|int $value) : void;
+
+    abstract public function getProducts() : array;
 }

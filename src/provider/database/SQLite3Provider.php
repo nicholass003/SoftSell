@@ -73,6 +73,13 @@ class SQLite3Provider extends DatabaseProvider{
         }
     }
 
+    public function getProducts() : array{
+        $row = $this->database->query("SELECT * FROM prices")->fetchArray(SQLITE3_ASSOC);
+        return [
+            $row['item'] => $row['price']
+        ];
+    }
+
     private function updatePrice(string $name, float|int $value) : void{
         $this->database->exec('BEGIN TRANSACTION;');
         try{

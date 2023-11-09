@@ -7,3 +7,9 @@ database-provider: JSON
 # - BedrockEconomy
 # - EconomyAPI
 economy-provider: BedrockEconomy
+
+# Messages
+# Tag's
+# {revenue} -> Revenue Amount
+with-message: true
+sell-message: "+{revenue} balance"

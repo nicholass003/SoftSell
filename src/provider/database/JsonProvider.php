@@ -44,4 +44,8 @@ class JsonProvider extends DatabaseProvider{
         $this->database->set($name, $value);
         $this->database->save();
     }
+
+    public function getProducts() : array{
+        return $this->database->getAll();
+    }
 }

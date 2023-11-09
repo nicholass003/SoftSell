@@ -5,12 +5,18 @@ A Sell plugin for PocketMine-MP plugins with more features.
 ## Features
 
 - Multiple Economy Providers like EconomyAPI and BedrockEconomy.
-- More Sell Type like Automatic Sell and Manual Sell.
+- More Sell Type like Automatic Sell, Inventory Sell and Manual Sell.
 - Simple add price and update price for the item.
+
+## How To Use
+
+- Automatic Sell -> Break blocks to trigger automatic selling.
+- Inventory Sell -> Sell ​​all the items in your inventory that can be sold easily by just right clicking.
+- Manual Sell -> Personally sell the item you're holding with a right-click.
 
 ## TODO List
 
-- [ ] Add more sell type
+- [x] Add more sell type
 - [ ] Customizeable item count to sell (item with same type)
 - [ ] Item price list
 

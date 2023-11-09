@@ -45,6 +45,8 @@ class Main extends PluginBase{
 
     public DatabaseProvider $databaseProvider;
 
+    public static array $subCommands = ["add", "auto", "help", "inventory", "items", "list", "manual", "reset", "status"];
+
     protected function onLoad() : void{
         $this->saveDefaultConfig();
     }
@@ -85,31 +87,69 @@ class Main extends PluginBase{
                                 $database = $this->getDatabaseProvider();
                                 $item = $sender->getInventory()->getItemInHand();
                                 $database->setPrice(Utils::getItemParserName($item->getVanillaName()), Utils::getNumericType($args[1]));
-                                $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "Success added " . $item->getVanillaName() . " with price: " . $args[1] );
+                                $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "Success added " . $item->getVanillaName() . " with price: " . $args[1]);
                             }else{
+                                if(!$sender->hasPermission("softsell.command.admin")){
+                                    $sender->sendMessage(TextFormat::RED . "You are not allowed to use this command");
+                                    return true;
+                                }
                                 $sender->sendMessage(TextFormat::RED. "Usage: /softsell add <price>");
                             }
                             return true;
                         case "auto":
                             Utils::setSellActive($sender, Utils::TYPE_AUTO);
-                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "SoftSell have set to Auto");
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "have set to Auto");
+                            return true;
+                        case "help":
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "Help Information");
+                            foreach(self::$subCommands as $subCommand){
+                                $sender->sendMessage("- " . TextFormat::GREEN . $subCommand . " " . TextFormat::YELLOW . Utils::getSubCommandDescription($subCommand));
+                            }
+                            return true;
+                        case "inv":
+                        case "inventory":
+                            Utils::setSellActive($sender, Utils::TYPE_INVENTORY);
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "have set to Inventory");
+                            return true;
+                        case "prices":
+                        case "items":
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "Item Information");
+                            $database = $this->getDatabaseProvider();
+                            foreach($database->getProducts() as $name => $price){
+                                $sender->sendMessage("- " . TextFormat::YELLOW . Utils::getItemName($name) . " price: " . $price . "\n");
+                            }
+                            return true;
+                        case "type":
+                        case "list":
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "Type Information");
+                            foreach(Utils::$allType as $type){
+                                $sender->sendMessage("- ". TextFormat::YELLOW . $type . "\n");
+                            }
                             return true;
                         case "hand":
                         case "manual":
                             Utils::setSellActive($sender, Utils::TYPE_MANUAL);
-                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "SoftSell have set to Manual");
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "have set to Manual");
                             return true;
                         case "off":
                         case "reset":
                             Utils::unsetSellActive($sender);
-                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "SoftSell have set to None");
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "have set to None");
+                            return true;
+                        case "info":
+                        case "status":
+                            $sender->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "Status: " . TextFormat::RESET . Utils::matchSellType(Utils::getSellActive($sender)));
                             return true;
                         default:
-                            $sender->sendMessage("Usage: /softsell <auto:manual:reset>");
+                            $sender->sendMessage("Usage: /softsell <auto:inventory:items:list:manual:reset:status>");
                             return true;
                     }
                 }else{
-                    $sender->sendMessage("Usage: /softsell <auto:manual>");
+                    if($sender->hasPermission("softsell.command.admin")){
+                        $sender->sendMessage("Usage: /softsell <add:auto:inventory:items:list:manual:reset:status>");
+                        return true;
+                    }
+                    $sender->sendMessage("Usage: /softsell <auto:inventory:items:list:manual:reset:status>");
                     return true;
                 }
             }

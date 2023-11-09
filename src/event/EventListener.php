@@ -30,7 +30,6 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\VanillaItems;
-use pocketmine\utils\TextFormat;
 
 class EventListener implements Listener{
 
@@ -50,27 +49,18 @@ class EventListener implements Listener{
 
     public function onBlockBreak(BlockBreakEvent $event) : void{
         $player = $event->getPlayer();
-        if(Utils::getSellActive($player) === Utils::TYPE_AUTO){
-            $block = $event->getBlock();
-            $price = $this->plugin->getDatabaseProvider()->getPrice(Utils::getItemParserName($block->asItem()->getVanillaName()));
-            if($price === 0) return;
+        if(Utils::performSellTransaction($player, $event->getBlock())){
             $event->setDrops([VanillaItems::AIR()]);
-            $this->plugin->getEconomyProvider()->addPlayerMoney($player, $price);
-            $player->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "+" . $price . " balance");
         }
     }
 
     public function onPlayerInteract(PlayerInteractEvent $event) : void{
         $player = $event->getPlayer();
         if($event->getAction() === PlayerInteractEvent::LEFT_CLICK_BLOCK) return;
-        if(Utils::getSellActive($player) === Utils::TYPE_MANUAL){
-            $item = $event->getItem();
-            $price = $this->plugin->getDatabaseProvider()->getPrice(Utils::getItemParserName($item->getVanillaName()));
-            if($price === 0) return;
-            $player->getInventory()->setItemInHand(VanillaItems::AIR());
-            $this->plugin->getEconomyProvider()->addPlayerMoney($player, $price * $item->getCount());
-            $player->sendMessage(Utils::PLUGIN_PREFIX . TextFormat::GREEN . "+" . $price * $item->getCount() . " balance");
-            $event->cancel();
+        if($event->getAction() === PlayerInteractEvent::RIGHT_CLICK_BLOCK){
+            if(Utils::performSellTransaction($player)){
+                $event->cancel();
+            }
         }
     }
 }
