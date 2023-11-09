@@ -1,6 +1,6 @@
 name: SoftSell
 api: 5.0.0
-version: 1.0.0
+version: 1.0.1
 main: nicholass003\softsell\Main
 author: nicholass003
 src-namespace-prefix: nicholass003\softsell
