@@ -54,7 +54,7 @@ class Main extends PluginBase{
     protected function onEnable() : void{
         self::setInstance($this);
 
-        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 
         $this->databaseProvider = match(strtolower($this->getConfig()->get("database-provider"))){
             "sqlite3" => new SQLite3Provider($this),
