@@ -28,7 +28,7 @@ abstract class DatabaseProvider{
 
     protected $database;
 
-    public function __construct(private Main $plugin){}
+    public function __construct(Main $plugin){}
 
     abstract public function getType() : string;
 

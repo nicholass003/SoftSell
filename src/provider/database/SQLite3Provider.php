@@ -29,7 +29,7 @@ use SQLite3;
 
 class SQLite3Provider extends DatabaseProvider{
 
-    public function __construct(private Main $plugin){
+    public function __construct(Main $plugin){
         $this->database = new SQLite3($plugin->getDataFolder() . 'prices.db');
         $this->database->exec('CREATE TABLE IF NOT EXISTS prices (item TEXT PRIMARY KEY, price NUMERIC);');
         $this->database->enableExceptions(true);

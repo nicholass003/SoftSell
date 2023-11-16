@@ -28,7 +28,7 @@ use pocketmine\utils\Config;
 
 class JsonProvider extends DatabaseProvider{
 
-    public function __construct(private Main $plugin){
+    public function __construct(Main $plugin){
         $this->database = new Config($plugin->getDataFolder() . "prices.json", Config::JSON);
     }
 

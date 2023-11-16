@@ -36,7 +36,7 @@ class BedrockEconomyProvider extends EconomyProvider{
             $amount = explode(".", (string)$amount);
     
             $balance = (int)$amount[0];
-            $decimals = (int)$amount[1] ?? 0;
+            $decimals = (int)$amount[1];
         }
 
         BedrockEconomyAPI::CLOSURE()->add($player->getXuid(), $player->getName(), $balance, $decimals, static fn () => null, static fn () => null);

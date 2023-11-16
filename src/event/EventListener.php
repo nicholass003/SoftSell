@@ -33,10 +33,6 @@ use pocketmine\item\VanillaItems;
 
 class EventListener implements Listener{
 
-    public function __construct(private Main $plugin){
-        //NOOP
-    }
-
     public function onPlayerJoin(PlayerJoinEvent $event) : void{
         $player = $event->getPlayer();
         Utils::setSellActive($player, Utils::TYPE_NONE);
