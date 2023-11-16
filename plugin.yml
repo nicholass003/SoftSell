@@ -5,7 +5,7 @@ main: nicholass003\softsell\Main
 author: nicholass003
 src-namespace-prefix: nicholass003\softsell
 depend:
-  - BedrockEconomyAPI
+  - BedrockEconomy
   - EconomyAPI
 commands:
   softsell:
