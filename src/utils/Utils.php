@@ -79,7 +79,8 @@ class Utils{
             "list" => "Show SoftSell type list",
             "manual" => "Change SoftSell type to Manual Sell",
             "reset" => "Change SoftSell type to None",
-            "status" => "Show SoftSell status"
+            "status" => "Show SoftSell status",
+            default => "Unknown SubCommand"
         };
     }
 
